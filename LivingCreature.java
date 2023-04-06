@@ -1,9 +1,14 @@
 
 public class LivingCreature {
+    /** name of Living Creature */
     String name;
+    /** size of Living Creature */
     double size;
+    /** whether or not Living Creature has rabies */
     boolean rabies;
+    /** whether or not Living Creature has acquired vampire abilities */
     protected boolean isVampire;
+    /** species of Living Creature */
     String species;
 
     /**
@@ -60,7 +65,6 @@ public class LivingCreature {
 
 
     public static void main(String[] args) {
-        //LivingCreature Teddy = new LivingCreature("Teddy", 160, false);
     }
 
 }
