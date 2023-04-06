@@ -39,6 +39,10 @@ public class Bat extends LivingCreature {
     //}
     //Number grow(){}
     
+    /**
+     * tries to repair damage done by a bite by apologizing, but if transmitted rabies and vampire, cannot try to undo the damage
+     * @param victim to undo a bite to
+     */
     void undo(LivingCreature victim){
         if (this.victims.contains(victim)) {
             if (victim.rabies || victim.isVampire) {
@@ -128,6 +132,8 @@ public class Bat extends LivingCreature {
         Tejas.getMarriedStatus();
         Tejas.divorce(Egg);
         Tejas.getMarriedStatus();
+        Teddy.grab("painting");
+        Teddy.grab("chair");
     }
 
 }

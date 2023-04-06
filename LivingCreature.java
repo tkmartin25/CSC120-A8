@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class LivingCreature {
     /** name of Living Creature */
@@ -10,6 +11,10 @@ public class LivingCreature {
     protected boolean isVampire;
     /** species of Living Creature */
     String species;
+    /** object in possession */
+    String inPossession;
+
+    String userPossessionChoice;
 
     /**
      * constructor for LivingCreature parent class
@@ -25,13 +30,60 @@ public class LivingCreature {
         this.species = "<Species Unknown>";
     }
 
-    //void grab(String item){
-        //System.out.println("You grabbed " + item);
-    //}
-    //String drop(String item){
-        //System.out.println("You dropped " + item);
-        //return item;
-    //}
+    /**
+     * item becomes in creature's possession
+     * @param item to be grabbed
+     */
+    void grab(String item){
+        if (this.inPossession == null) {
+            this.inPossession = item;
+            System.out.println(this.name + " grabbed a " + item + ".");
+        }
+        else {
+            System.out.println(this.name + " is already carrying a " + this.inPossession + ".");
+            Scanner userInput = new Scanner(System.in); 
+            System.out.println("Would you like " + this.name + " to drop the " + this.inPossession + " and pick up a " + item + "? (Y/N) ");
+            String userPossessionChoice = userInput.nextLine();
+            userInput.close();
+            userPossessionChoice = userPossessionChoice.toUpperCase();
+            if (userPossessionChoice.equals("Y")) {
+                this.drop(this.inPossession);
+                this.grab(item);
+            }
+            else if (userPossessionChoice.equals("N")) {
+                System.out.println(this.name + " did not pick up a " + item + ".");
+            }
+            else {
+                System.out.println(userPossessionChoice);
+                throw new RuntimeException("Invalid response.");
+            }
+
+        }
+
+    }
+    
+    /**
+     * drops item that is in Living Creature's possession
+     * @param item to be dropped
+     * @return item that is dropped, and null if nothing is dropped
+     */
+    String drop(String item) {
+        if (this.inPossession == item) {
+            this.inPossession = null;
+            System.out.println(this.name + " dropped a " + item + ".");
+            return item;
+        }
+        else if (this.inPossession == null) {
+            System.out.println(this.name + " is not currently carrying anything.");
+            return null;
+        }
+        else {
+            System.out.println(this.name + " is currently carrying " + this.inPossession + ".");
+            return null;
+        }
+    }
+    
+    
     //void examine(String item){
         //System.out.println("You examinted " + item);
     //}
