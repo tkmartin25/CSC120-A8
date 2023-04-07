@@ -131,7 +131,6 @@ public class Bat extends LivingCreature {
         Egg.checkFriends();
         Teddy.checkFriends();
         batty.rest(4);
-        Teddy.rest(2);
         Tejas.marry(Egg);
         Tejas.getMarriedStatus();
         Tejas.divorce(Egg);
