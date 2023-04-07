@@ -19,6 +19,22 @@ public class Human extends LivingCreature {
         this.isVampire = false;
         this.isMarried = false;
         this.species = "Human";
+        this.maxSize = 210;
+        this.friends = new ArrayList<Human>();
+    }
+
+    /**
+     * constructor for Human, with name, size, and rabies status
+     * @param name
+     * @param size
+     * @param maxSize
+     * @param rabies
+     */
+    public Human(String name, double size, double maxSize, boolean rabies) {
+        super(name, size, maxSize, rabies);
+        this.isVampire = false;
+        this.isMarried = false;
+        this.species = "Human";
         this.friends = new ArrayList<Human>();
     }
 

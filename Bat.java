@@ -7,8 +7,16 @@ public class Bat extends LivingCreature {
     boolean hasShapeShifted;
     int hours;
     
-    public Bat(String name, boolean isVampireForm, double size, boolean rabies) {
+    public Bat(String name, double size, boolean rabies) {
         super(name, size, rabies);
+        this.isVampireForm = false;
+        this.victims = new ArrayList<LivingCreature>();
+        this.species = "Bat";
+        System.out.println("You have created a new bat.");
+    }
+
+    public Bat(String name, boolean isVampireForm, double size, double maxSize, boolean rabies) {
+        super(name, size, maxSize, rabies);
         this.isVampireForm = isVampireForm;
         this.victims = new ArrayList<LivingCreature>();
         this.species = "Bat";
@@ -34,10 +42,6 @@ public class Bat extends LivingCreature {
     //boolean fly(int x, int y){
        // System.out.println("You flew.");
     //}
-    //Number shrink(){
-        
-    //}
-    //Number grow(){}
     
     /**
      * tries to repair damage done by a bite by apologizing, but if transmitted rabies and vampire, cannot try to undo the damage
@@ -133,8 +137,10 @@ public class Bat extends LivingCreature {
         Tejas.divorce(Egg);
         Tejas.getMarriedStatus();
         Teddy.grab("painting");
-        Teddy.grab("chair");
+        //Teddy.grab("chair");
         Teddy.shrink(3);
+        Egg.marry(Tejas);
+        Teddy.grow(3);
     }
 
 }

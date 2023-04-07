@@ -6,6 +6,8 @@ public class LivingCreature {
     /** size of Living Creature */
     double size;
     /** whether or not Living Creature has rabies */
+    double maxSize;
+    /** whether or not Living Creature has rabies */
     boolean rabies;
     /** whether or not Living Creature has acquired vampire abilities */
     protected boolean isVampire;
@@ -16,6 +18,8 @@ public class LivingCreature {
 
     String userPossessionChoice;
 
+    double amountToGrow;
+    
     /**
      * constructor for LivingCreature parent class
      * @param name
@@ -25,6 +29,23 @@ public class LivingCreature {
     public LivingCreature(String name, double size, boolean rabies) {
         this.name = name;
         this.size = size;
+        this.maxSize = 200;
+        this.rabies = rabies;
+        this.isVampire = false;
+        this.species = "<Species Unknown>";
+    }
+
+    /**
+     * constructor for LivingCreature parent class
+     * @param name
+     * @param size
+     * @param maxSize
+     * @param rabies
+     */
+    public LivingCreature(String name, double size, double maxSize, boolean rabies) {
+        this.name = name;
+        this.size = size;
+        this.maxSize = maxSize;
         this.rabies = rabies;
         this.isVampire = false;
         this.species = "<Species Unknown>";
@@ -115,7 +136,16 @@ public class LivingCreature {
         
     }
 
-    //Number grow(){}
+    Number grow(double amountToGrow){
+        if (this.size + amountToGrow < this.maxSize) {
+            this.size = this.size + amountToGrow;
+            System.out.println(this.name + " is now this size: " + this.size);
+            return this.size;
+        }
+        else {
+            throw new RuntimeException(this.name + " cannot grow by that amount.");
+        }
+    }
 
     /**
      * living creature rests for a user-specified number of hours
