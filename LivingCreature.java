@@ -85,7 +85,7 @@ public class LivingCreature {
     
     
     //void examine(String item){
-        //System.out.println("You examinted " + item);
+        //System.out.println("You examined " + item);
     //}
     //void use(String item){
         //System.out.println("You used " + item);
@@ -97,10 +97,30 @@ public class LivingCreature {
     //boolean fly(int x, int y){
        // System.out.println("You flew.");
     //}
-    //Number shrink(){
+
+    /**
+     * decreases living creature's size by user inputted amount
+     * @param amountToShrink double to shrink the living creature
+     * @return new size after shrinking
+     */
+    Number shrink(double amountToShrink){
+        if (this.size - amountToShrink > 0) {
+            this.size = this.size - amountToShrink;
+            System.out.println(this.name + " is now this size: " + this.size);
+            return this.size;
+        }
+        else {
+            throw new RuntimeException(this.name + " cannot shrink by that amount.");
+        }
         
-    //}
+    }
+
     //Number grow(){}
+
+    /**
+     * living creature rests for a user-specified number of hours
+     * @param hours to be rested
+     */
     void rest(int hours){
         System.out.println(this.name + " rested for " + hours + " hours.");
     }
