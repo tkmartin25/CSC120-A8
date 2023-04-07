@@ -1,12 +1,20 @@
 import java.util.ArrayList;
 
-
+/** bat class extends LivingCreature parent class */
 public class Bat extends LivingCreature {
+    /** whether or not bat starts off in vampire form */
     boolean isVampireForm;
+    /** stores which creatures the bat has bitten */
     ArrayList<LivingCreature> victims;
+    /** stores wehther or not the bat has shape shifted before */
     boolean hasShapeShifted;
-    int hours;
     
+    /**
+     * simple constructor for bat subclass
+     * @param name of bat
+     * @param size of bat
+     * @param rabies whether or not bat has rabies
+     */
     public Bat(String name, double size, boolean rabies) {
         super(name, size, rabies);
         this.isVampireForm = false;
@@ -16,6 +24,14 @@ public class Bat extends LivingCreature {
         System.out.println("You have created a new bat.");
     }
 
+    /**
+     * full constructor for bat subclass
+     * @param name of bat
+     * @param isVampireForm whether or not bat is in vampire form (can later shapeshift)
+     * @param size of bat
+     * @param maxSize maximum size bat can reach by growing
+     * @param rabies whether or not bat has rabies
+     */
     public Bat(String name, boolean isVampireForm, double size, double maxSize, boolean rabies) {
         super(name, size, maxSize, rabies);
         this.isVampireForm = isVampireForm;
@@ -60,7 +76,7 @@ public class Bat extends LivingCreature {
 
     /**
      * bites other living creatures (victims) and gives them rabies or turns them into vampires
-     * @param victim
+     * @param victim to be bitten
      */
     void bite(LivingCreature victim) {
         System.out.println(this.name + " bit " + victim.name + ".");

@@ -21,6 +21,8 @@ public class LivingCreature {
 
     double amountToGrow;
 
+    int hours;
+
     /**
      * constructor for LivingCreature parent class
      * @param name
