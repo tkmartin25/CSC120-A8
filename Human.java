@@ -20,6 +20,7 @@ public class Human extends LivingCreature {
         this.isMarried = false;
         this.species = "Human";
         this.maxSize = 210;
+        this.canFly = false;
         this.friends = new ArrayList<Human>();
     }
 
@@ -35,6 +36,7 @@ public class Human extends LivingCreature {
         this.isVampire = false;
         this.isMarried = false;
         this.species = "Human";
+        this.canFly = false;
         this.friends = new ArrayList<Human>();
     }
 

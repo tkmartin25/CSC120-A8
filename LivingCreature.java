@@ -11,6 +11,7 @@ public class LivingCreature {
     boolean rabies;
     /** whether or not Living Creature has acquired vampire abilities */
     protected boolean isVampire;
+    boolean canFly;
     /** species of Living Creature */
     String species;
     /** object in possession */
@@ -19,7 +20,7 @@ public class LivingCreature {
     String userPossessionChoice;
 
     double amountToGrow;
-    
+
     /**
      * constructor for LivingCreature parent class
      * @param name
@@ -32,6 +33,7 @@ public class LivingCreature {
         this.maxSize = 200;
         this.rabies = rabies;
         this.isVampire = false;
+        this.canFly = false;
         this.species = "<Species Unknown>";
     }
 
@@ -41,6 +43,7 @@ public class LivingCreature {
      * @param size
      * @param maxSize
      * @param rabies
+     * @param canFly
      */
     public LivingCreature(String name, double size, double maxSize, boolean rabies) {
         this.name = name;
@@ -48,6 +51,7 @@ public class LivingCreature {
         this.maxSize = maxSize;
         this.rabies = rabies;
         this.isVampire = false;
+        this.canFly = false;
         this.species = "<Species Unknown>";
     }
 
@@ -115,9 +119,19 @@ public class LivingCreature {
     //boolean walk(String direction){
         //System.out.println("You walked.");
     //}
-    //boolean fly(int x, int y){
-       // System.out.println("You flew.");
-    //}
+
+    boolean fly(int x, int y){
+        if (this.canFly) {
+            System.out.println(this.name + " flew in the direction of " + x + " and " + y + ".");
+            return true;
+        }
+        else {
+            throw new RuntimeException(this.name + " cannot fly.");
+            return false;
+        }
+
+       
+    }
 
     /**
      * decreases living creature's size by user inputted amount

@@ -12,6 +12,7 @@ public class Bat extends LivingCreature {
         this.isVampireForm = false;
         this.victims = new ArrayList<LivingCreature>();
         this.species = "Bat";
+        this.canFly = true;
         System.out.println("You have created a new bat.");
     }
 
@@ -20,6 +21,7 @@ public class Bat extends LivingCreature {
         this.isVampireForm = isVampireForm;
         this.victims = new ArrayList<LivingCreature>();
         this.species = "Bat";
+        this.canFly = true;
         System.out.println("You have created a new bat.");
     }
 
@@ -135,6 +137,8 @@ public class Bat extends LivingCreature {
         //Teddy.grow(3);
         Teddy.marry(Amelia);
         Amelia.getMarriedStatus();
+        batty.fly(3,4);
+        Teddy.fly(3,4);
     }
 
 }
