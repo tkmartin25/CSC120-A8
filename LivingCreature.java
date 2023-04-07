@@ -127,7 +127,6 @@ public class LivingCreature {
         }
         else {
             throw new RuntimeException(this.name + " cannot fly.");
-            return false;
         }
 
        

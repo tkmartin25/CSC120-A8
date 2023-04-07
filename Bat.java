@@ -24,19 +24,6 @@ public class Bat extends LivingCreature {
         this.canFly = true;
         System.out.println("You have created a new bat.");
     }
-
-    //void examine(String item){
-        //System.out.println("You examinted " + item);
-    //}
-    //void use(String item){
-        //System.out.println("You used " + item);
-    //}
-    //boolean walk(String direction){
-        //System.out.println("You walked.");
-    //}
-    //boolean fly(int x, int y){
-       // System.out.println("You flew.");
-    //}
     
     /**
      * tries to repair damage done by a bite by apologizing, but if transmitted rabies and vampire, cannot try to undo the damage
@@ -138,7 +125,7 @@ public class Bat extends LivingCreature {
         Teddy.marry(Amelia);
         Amelia.getMarriedStatus();
         batty.fly(3,4);
-        Teddy.fly(3,4);
+        //Teddy.fly(3,4);
     }
 
 }
