@@ -44,12 +44,12 @@ public class Human extends LivingCreature {
      */
     void befriend(Human human) {
         if (this.friends.contains(human)) {
-            System.out.println("You're already friends with " + human.name + ".");
+            System.out.println(this.name + " is already friends with " + human.name + ".");
         }
         else {
             this.friends.add(human);
             human.friends.add(this);
-            System.out.println("You befriended " + human.name + ".");
+            System.out.println(this.name + " befriended " + human.name + ".");
         }
     }
 
