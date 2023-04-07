@@ -23,13 +23,6 @@ public class Bat extends LivingCreature {
         System.out.println("You have created a new bat.");
     }
 
-    //void grab(String item){
-        //System.out.println("You grabbed " + item);
-    //}
-    //String drop(String item){
-        //System.out.println("You dropped " + item);
-        //return item;
-    //}
     //void examine(String item){
         //System.out.println("You examinted " + item);
     //}
