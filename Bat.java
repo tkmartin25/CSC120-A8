@@ -111,7 +111,7 @@ public class Bat extends LivingCreature {
 
     /** for testing */
     public static void main(String[] args) {
-        Bat batty = new Bat("Batty", false, 30, true);
+        Bat batty = new Bat("Batty", false, 30, 43, true);
         batty.shapeShift();
         Human Teddy = new Human("Teddy", 160, false);
         batty.bite(Teddy);
@@ -138,9 +138,11 @@ public class Bat extends LivingCreature {
         Tejas.getMarriedStatus();
         Teddy.grab("painting");
         //Teddy.grab("chair");
-        Teddy.shrink(3);
+        //Teddy.shrink(3);
         Egg.marry(Tejas);
-        Teddy.grow(3);
+        //Teddy.grow(3);
+        Teddy.marry(Amelia);
+        Amelia.getMarriedStatus();
     }
 
 }

@@ -96,6 +96,7 @@ public class Human extends LivingCreature {
         }
         else if (!this.isMarried && !human.isMarried) {
             this.isMarried = true;
+            human.isMarried = true;
             this.spouse = human;
             human.spouse = this;
             System.out.println("Congratulations to " + this.name + " and " + human.name + ", who are now married!");
@@ -112,6 +113,7 @@ public class Human extends LivingCreature {
         }
         else if (this.spouse == human) {
             this.isMarried = false;
+            human.isMarried = false;
             this.spouse = null;
             human.spouse = null;
             System.out.println("Oop. " + this.name + " and " + human.name + " are now divorced.");
