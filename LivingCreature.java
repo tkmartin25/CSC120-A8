@@ -127,7 +127,7 @@ public class LivingCreature {
     }
     
     //boolean walk(String direction){
-        //System.out.println("You walked.");
+    //    System.out.println("You walked.");
     //}
 
     /**
@@ -146,8 +146,6 @@ public class LivingCreature {
         else {
             throw new RuntimeException(this.name + " cannot fly.");
         }
-
-       
     }
 
     /**
