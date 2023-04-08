@@ -134,7 +134,7 @@ public class LivingCreature {
      * living creatures travels an x and y direction and their coordinates change
      * @param x number to travel in the x - axis direction
      * @param y number to travel in the y - axis direction
-     * @return
+     * @return true if flew successfully, otherwise if living creature cannot fly throw error
      */
     boolean fly(double x, double y){
         if (this.canFly) {
@@ -150,6 +150,9 @@ public class LivingCreature {
        
     }
 
+    /**
+     * prints out a living creature's x and y coordinates
+     */
     void checkCoordinates() {
         System.out.println(this.name + " is at (" + this.x + ", " + this.y + ").");
     }
