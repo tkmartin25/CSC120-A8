@@ -55,6 +55,15 @@ public class Human extends LivingCreature {
         }
     }
 
+    void thrust() {
+        if (this.name == "Amelia") {
+            System.out.println("Amelia performed a sonic thrust.");
+        }
+        else {
+            System.out.println(this.name + " thrusted.");
+        }
+    }
+
     /**
      * human can unfriend a human of choice, which removes the friend from array list of friends
      * @param human to be unfriended

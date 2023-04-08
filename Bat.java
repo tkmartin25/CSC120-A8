@@ -138,10 +138,15 @@ public class Bat extends LivingCreature {
         //Teddy.shrink(3);
         Egg.marry(Tejas);
         //Teddy.grow(3);
-        Teddy.marry(Amelia);
-        Amelia.getMarriedStatus();
+        //Teddy.marry(Amelia);
+        //Amelia.getMarriedStatus();
         batty.fly(3,4);
+        batty.fly(8,-4);
+        batty.checkCoordinates();
         //Teddy.fly(3,4);
+        Teddy.thrust();
+        Amelia.thrust();
+        Tejas.thrust();
     }
 
 }

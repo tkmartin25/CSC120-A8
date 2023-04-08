@@ -23,6 +23,10 @@ public class LivingCreature {
 
     int hours;
 
+    double x;
+
+    double y;
+
     /**
      * constructor for LivingCreature parent class
      * @param name
@@ -37,6 +41,8 @@ public class LivingCreature {
         this.isVampire = false;
         this.canFly = false;
         this.species = "<Species Unknown>";
+        this.x = 0;
+        this.y = 0;
     }
 
     /**
@@ -114,17 +120,27 @@ public class LivingCreature {
     //void examine(String item){
         //System.out.println("You examined " + item);
     //}
-    //void use(String item){
-        //System.out.println("You used " + item);
-    //}
+    
+    void use(String item){
+        if (item == "")
+        System.out.println("You used " + item + ".");
+    }
     
     //boolean walk(String direction){
         //System.out.println("You walked.");
     //}
 
-    boolean fly(int x, int y){
+    /**
+     * living creatures travels an x and y direction and their coordinates change
+     * @param x number to travel in the x - axis direction
+     * @param y number to travel in the y - axis direction
+     * @return
+     */
+    boolean fly(double x, double y){
         if (this.canFly) {
             System.out.println(this.name + " flew in the direction of " + x + " and " + y + ".");
+            this.x = this.x + x;
+            this.y = this.y + y;
             return true;
         }
         else {
@@ -132,6 +148,10 @@ public class LivingCreature {
         }
 
        
+    }
+
+    void checkCoordinates() {
+        System.out.println(this.name + " is at (" + this.x + ", " + this.y + ").");
     }
 
     /**
