@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
-public class LivingCreature {
+import javax.management.RuntimeErrorException;
+
+public class LivingCreature implements Contract {
     /** name of Living Creature */
     String name;
     /** size of Living Creature */
@@ -67,7 +69,7 @@ public class LivingCreature {
      * item becomes in creature's possession
      * @param item to be grabbed
      */
-    void grab(String item){
+    public void grab(String item){
         if (this.inPossession == null) {
             this.inPossession = item;
             System.out.println(this.name + " grabbed a " + item + ".");
@@ -100,7 +102,7 @@ public class LivingCreature {
      * @param item to be dropped
      * @return item that is dropped, and null if nothing is dropped
      */
-    String drop(String item) {
+    public String drop(String item) {
         if (this.inPossession == item) {
             this.inPossession = null;
             System.out.println(this.name + " dropped a " + item + ".");
@@ -117,18 +119,42 @@ public class LivingCreature {
     }
     
     
-    //void examine(String item){
-        //System.out.println("You examined " + item);
-    //}
-    
-    void use(String item){
-        if (item == "")
-        System.out.println("You used " + item + ".");
+    public void examine(String item){
+        System.out.println("You examined " + item);
     }
     
-    //boolean walk(String direction){
-    //    System.out.println("You walked.");
-    //}
+    public void use(String item){
+        if (item == "chair") {
+            System.out.println("You sat on the " + item + ".");
+        }
+    }
+    
+    public boolean walk(String direction){
+        direction = direction.toLowerCase();
+        if (direction == "north") {
+            System.out.println("You walked north.");
+            this.y = y + 1;
+            return true;
+        }
+        if (direction == "south") {
+            System.out.println("You walked south.");
+            this.y = y - 1;
+            return true;
+        }
+        if (direction == "west") {
+            System.out.println("You walked west.");
+            this.x = x - 1;
+            return true;
+        }
+        if (direction == "east") {
+            System.out.println("You walked east.");
+            this.x = x + 1;
+            return true;
+        }
+        else {
+            throw new RuntimeException("Error: You must input one of the following four directions: 'north', 'south', 'west', or 'east'.");
+        }
+    }
 
     /**
      * living creatures travels an x and y direction and their coordinates change
@@ -191,7 +217,9 @@ public class LivingCreature {
         System.out.println(this.name + " rested for " + hours + " hours.");
     }
 
-    //void undo(){}
+    void undo(){
+        
+    }
 
     /**
      * accessor for name

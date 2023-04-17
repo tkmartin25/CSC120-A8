@@ -144,9 +144,6 @@ public class Bat extends LivingCreature {
         batty.fly(8,-4);
         batty.checkCoordinates();
         //Teddy.fly(3,4);
-        Teddy.thrust();
-        Amelia.thrust();
-        Tejas.thrust();
     }
 
 }
