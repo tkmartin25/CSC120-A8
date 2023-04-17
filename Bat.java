@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** bat class extends LivingCreature parent class */
+/** bat class implements Contract */
 public class Bat implements Contract {
     /** whether or not bat starts off in vampire form */
     boolean isVampireForm;
@@ -9,30 +9,31 @@ public class Bat implements Contract {
     ArrayList<Bat> victims;
     /** stores wehther or not the bat has shape shifted before */
     boolean hasShapeShifted;
-    /** name of Living Creature */
+    /** name of Bat */
     String name;
-    /** size of Living Creature */
+    /** size of Bat */
     double size;
-    /** whether or not Living Creature has rabies */
+    /** whether or not Bat has rabies */
     double maxSize;
-    /** whether or not Living Creature has rabies */
+    /** whether or not Bat has rabies */
     boolean rabies;
-    /** whether or not Living Creature has acquired vampire abilities */
+    /** whether or not Bat has acquired vampire abilities */
     protected boolean isVampire;
+    /** whether or not bat can fly */
     boolean canFly;
-    /** species of Living Creature */
+    /** species of Bat */
     String species;
     /** object in possession */
     String inPossession;
-
+    /** user's choice to grab an object if already holding an object */
     String userPossessionChoice;
-
+    /** quantity for bat to grow */
     double amountToGrow;
-
+    /** unit of time for bat to rest for */
     int hours;
-
+    /** x coordinate of bat */
     double x;
-
+    /** y coordinate of bat */
     double y;
 
     /**
@@ -152,7 +153,7 @@ public class Bat implements Contract {
      * @param y number to travel in the y - axis direction
      * @return true if flew successfully, otherwise if living creature cannot fly throw error
      */
-    boolean fly(double x, double y){
+    public boolean fly(int x, int y){
         if (this.canFly) {
             System.out.println(this.name + " flew in the direction of " + x + " and " + y + ".");
             this.x = this.x + x;
@@ -167,16 +168,16 @@ public class Bat implements Contract {
     /**
      * prints out a bat's x and y coordinates
      */
-    void checkCoordinates() {
+    public void checkCoordinates() {
         System.out.println(this.name + " is at (" + this.x + ", " + this.y + ").");
     }
 
     /**
-     * decreases bat's size by user inputted amount
-     * @param amountToShrink double to shrink the living creature
+     * decreases bat's size by 2
      * @return new size after shrinking
      */
-    Number shrink(double amountToShrink){
+    public Number shrink(){
+        double amountToShrink = 2;
         if (this.size - amountToShrink > 0) {
             this.size = this.size - amountToShrink;
             System.out.println(this.name + " is now this size: " + this.size);
@@ -189,11 +190,11 @@ public class Bat implements Contract {
     }
 
     /**
-     * increases bat's size by user inputted amount
-     * @param amountToShrink double which will be the bat's new size
+     * increases bat's size by 2
      * @return new size after growing
      */
-    Number grow(double amountToGrow){
+    public Number grow(){
+        double amountToGrow = 2;
         if (this.size + amountToGrow < this.maxSize) {
             this.size = this.size + amountToGrow;
             System.out.println(this.name + " is now this size: " + this.size);
@@ -205,18 +206,18 @@ public class Bat implements Contract {
     }
 
     /**
-     * living creature rests for a user-specified number of hours
-     * @param hours to be rested
+     * bat rests for 8 hours
      */
-    void rest(int hours){
+    public void rest(){
+        int hours = 8;
         System.out.println(this.name + " rested for " + hours + " hours.");
     }
 
     /**
      * accessor for name
-     * @return name of living creature
+     * @return name of bat
      */
-    String getName(){
+    public String getName(){
         return this.name;
     }
     
@@ -224,7 +225,7 @@ public class Bat implements Contract {
      * tries to repair damage done by a bite by apologizing, but if transmitted rabies and vampire, cannot try to undo the damage
      * @param victim to undo a bite to
      */
-    void undo(Bat victim){
+    public void undo(Bat victim){
         if (this.victims.contains(victim)) {
             if (victim.rabies || victim.isVampire) {
                 System.out.println("You tried to apologize to " + victim.name + ". Um... You can't undo a transmission of vampire qualities or rabies.");
@@ -256,7 +257,7 @@ public class Bat implements Contract {
      * bites other living creatures (victims) and gives them rabies or turns them into vampires
      * @param victim to be bitten
      */
-    void bite(Bat victim) {
+    public void bite(Bat victim) {
         System.out.println(this.name + " bit " + victim.name + ".");
         this.victims.add(victim);
         if (this.rabies) {
@@ -272,7 +273,7 @@ public class Bat implements Contract {
     /**
      * allows bat to shapeshift into vampire form, giving it the capability to change other living creatures iinto vampires
      */
-    void shapeShift(){
+    public void shapeShift(){
         this.hasShapeShifted = true;
         if (!this.isVampireForm) {
             this.isVampireForm = true;
