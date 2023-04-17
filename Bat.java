@@ -1,4 +1,6 @@
+/** import ArrayList */
 import java.util.ArrayList;
+/** import Scanner */
 import java.util.Scanner;
 
 /** bat class implements Contract */
@@ -13,7 +15,7 @@ public class Bat implements Contract {
     String name;
     /** size of Bat */
     double size;
-    /** whether or not Bat has rabies */
+    /** max size bat can reach */
     double maxSize;
     /** whether or not Bat has rabies */
     boolean rabies;
@@ -39,10 +41,10 @@ public class Bat implements Contract {
     /**
      * full constructor for bat subclass
      * @param name of bat
-     * @param isVampireForm whether or not bat is in vampire form (can later shapeshift)
      * @param size of bat
      * @param maxSize maximum size bat can reach by growing
      * @param rabies whether or not bat has rabies
+     * @param isVampireForm whether or not bat is in vampire form (can later shapeshift)
      */
     public Bat(String name, double size, double maxSize, boolean rabies, boolean isVampireForm) {
         this.name = name;
@@ -59,7 +61,7 @@ public class Bat implements Contract {
     }
 
     /**
-     * item becomes in creature's possession
+     * item becomes in bat's possession
      * @param item to be grabbed
      */
     public void grab(String item){
@@ -89,7 +91,7 @@ public class Bat implements Contract {
     }
     
     /**
-     * drops item that is in Living Creature's possession
+     * drops item that is in bat's possession
      * @param item to be dropped
      * @return item that is dropped, and null if nothing is dropped
      */
@@ -109,17 +111,37 @@ public class Bat implements Contract {
         }
     }
     
-    
+    /**
+     * tells user if item has special properties; potions have special properties, other items do not
+     * @param item to be examined
+     */
     public void examine(String item){
-        System.out.println("You examined " + item);
+        System.out.println("You examined " + item + ".");
+        if (item.toLowerCase().contains("potion")) {
+            System.out.println("This item has special properties.");
+        }
     }
     
+    /**
+     * if item is a chair, the bat sits on it, if it is a potion, it is drunk. All other objects are unusable.
+     * @param item to be examined
+     */
     public void use(String item){
         if (item == "chair") {
             System.out.println("You sat on the " + item + ".");
         }
+        else if (item.toLowerCase().contains("potion")) {
+            System.out.println("You drank the potion and acquired special properites from " + item + ".");
+        }
+        else {
+            System.out.println("There doesn't seem to be anything you can do with this item right now.");
+        }
     }
     
+    /**
+     * based on the direction north, south, east, or west, the bat moves coordinates by a unit of 1
+     * @param direction for bat to walk in
+     */
     public boolean walk(String direction){
         direction = direction.toLowerCase();
         if (direction == "north") {
@@ -307,7 +329,7 @@ public class Bat implements Contract {
         //Amelia.befriend(Teddy);
         //Egg.checkFriends();
         //Teddy.checkFriends();
-        batty.rest(4);
+        batty.rest();
         //Tejas.marry(Egg);
         //Tejas.getMarriedStatus();
         //Tejas.divorce(Egg);
@@ -322,6 +344,7 @@ public class Bat implements Contract {
         batty.fly(3,4);
         batty.fly(8,-4);
         batty.checkCoordinates();
+        batty.use("Healing Potion");
         //Teddy.fly(3,4);
     }
 
