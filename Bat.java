@@ -1,28 +1,39 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /** bat class extends LivingCreature parent class */
-public class Bat extends LivingCreature {
+public class Bat implements Contract {
     /** whether or not bat starts off in vampire form */
     boolean isVampireForm;
     /** stores which creatures the bat has bitten */
-    ArrayList<LivingCreature> victims;
+    ArrayList<Bat> victims;
     /** stores wehther or not the bat has shape shifted before */
     boolean hasShapeShifted;
-    
-    /**
-     * simple constructor for bat subclass
-     * @param name of bat
-     * @param size of bat
-     * @param rabies whether or not bat has rabies
-     */
-    public Bat(String name, double size, boolean rabies) {
-        super(name, size, rabies);
-        this.isVampireForm = false;
-        this.victims = new ArrayList<LivingCreature>();
-        this.species = "Bat";
-        this.canFly = true;
-        System.out.println("You have created a new bat.");
-    }
+    /** name of Living Creature */
+    String name;
+    /** size of Living Creature */
+    double size;
+    /** whether or not Living Creature has rabies */
+    double maxSize;
+    /** whether or not Living Creature has rabies */
+    boolean rabies;
+    /** whether or not Living Creature has acquired vampire abilities */
+    protected boolean isVampire;
+    boolean canFly;
+    /** species of Living Creature */
+    String species;
+    /** object in possession */
+    String inPossession;
+
+    String userPossessionChoice;
+
+    double amountToGrow;
+
+    int hours;
+
+    double x;
+
+    double y;
 
     /**
      * full constructor for bat subclass
@@ -32,20 +43,188 @@ public class Bat extends LivingCreature {
      * @param maxSize maximum size bat can reach by growing
      * @param rabies whether or not bat has rabies
      */
-    public Bat(String name, boolean isVampireForm, double size, double maxSize, boolean rabies) {
-        super(name, size, maxSize, rabies);
+    public Bat(String name, double size, double maxSize, boolean rabies, boolean isVampireForm) {
+        this.name = name;
+        this.size = size;
+        this.maxSize = maxSize;
+        this.rabies = rabies;
         this.isVampireForm = isVampireForm;
-        this.victims = new ArrayList<LivingCreature>();
+        this.victims = new ArrayList<Bat>();
         this.species = "Bat";
         this.canFly = true;
+        this.x = 0;
+        this.y = 0;
         System.out.println("You have created a new bat.");
+    }
+
+    /**
+     * item becomes in creature's possession
+     * @param item to be grabbed
+     */
+    public void grab(String item){
+        if (this.inPossession == null) {
+            this.inPossession = item;
+            System.out.println(this.name + " grabbed a " + item + ".");
+        }
+        else {
+            System.out.println(this.name + " is already carrying a " + this.inPossession + ".");
+            Scanner userInput = new Scanner(System.in); 
+            System.out.println("Would you like " + this.name + " to drop the " + this.inPossession + " and pick up a " + item + "? (Y/N) ");
+            String userPossessionChoice = userInput.nextLine();
+            userInput.close();
+            userPossessionChoice = userPossessionChoice.toUpperCase();
+            if (userPossessionChoice.equals("Y")) {
+                this.drop(this.inPossession);
+                this.grab(item);
+            }
+            else if (userPossessionChoice.equals("N")) {
+                System.out.println(this.name + " did not pick up a " + item + ".");
+            }
+            else {
+                System.out.println(userPossessionChoice);
+                throw new RuntimeException("Invalid response.");
+            }
+        }
+    }
+    
+    /**
+     * drops item that is in Living Creature's possession
+     * @param item to be dropped
+     * @return item that is dropped, and null if nothing is dropped
+     */
+    public String drop(String item) {
+        if (this.inPossession == item) {
+            this.inPossession = null;
+            System.out.println(this.name + " dropped a " + item + ".");
+            return item;
+        }
+        else if (this.inPossession == null) {
+            System.out.println(this.name + " is not currently carrying anything.");
+            return null;
+        }
+        else {
+            System.out.println(this.name + " is currently carrying " + this.inPossession + ".");
+            return null;
+        }
+    }
+    
+    
+    public void examine(String item){
+        System.out.println("You examined " + item);
+    }
+    
+    public void use(String item){
+        if (item == "chair") {
+            System.out.println("You sat on the " + item + ".");
+        }
+    }
+    
+    public boolean walk(String direction){
+        direction = direction.toLowerCase();
+        if (direction == "north") {
+            System.out.println("You walked north.");
+            this.y = y + 1;
+            return true;
+        }
+        if (direction == "south") {
+            System.out.println("You walked south.");
+            this.y = y - 1;
+            return true;
+        }
+        if (direction == "west") {
+            System.out.println("You walked west.");
+            this.x = x - 1;
+            return true;
+        }
+        if (direction == "east") {
+            System.out.println("You walked east.");
+            this.x = x + 1;
+            return true;
+        }
+        else {
+            throw new RuntimeException("Error: You must input one of the following four directions: 'north', 'south', 'west', or 'east'.");
+        }
+    }
+
+    /**
+     * living creatures travels an x and y direction and their coordinates change
+     * @param x number to travel in the x - axis direction
+     * @param y number to travel in the y - axis direction
+     * @return true if flew successfully, otherwise if living creature cannot fly throw error
+     */
+    boolean fly(double x, double y){
+        if (this.canFly) {
+            System.out.println(this.name + " flew in the direction of " + x + " and " + y + ".");
+            this.x = this.x + x;
+            this.y = this.y + y;
+            return true;
+        }
+        else {
+            throw new RuntimeException(this.name + " cannot fly.");
+        }
+    }
+
+    /**
+     * prints out a bat's x and y coordinates
+     */
+    void checkCoordinates() {
+        System.out.println(this.name + " is at (" + this.x + ", " + this.y + ").");
+    }
+
+    /**
+     * decreases bat's size by user inputted amount
+     * @param amountToShrink double to shrink the living creature
+     * @return new size after shrinking
+     */
+    Number shrink(double amountToShrink){
+        if (this.size - amountToShrink > 0) {
+            this.size = this.size - amountToShrink;
+            System.out.println(this.name + " is now this size: " + this.size);
+            return this.size;
+        }
+        else {
+            throw new RuntimeException(this.name + " cannot shrink by that amount.");
+        }
+        
+    }
+
+    /**
+     * increases bat's size by user inputted amount
+     * @param amountToShrink double which will be the bat's new size
+     * @return new size after growing
+     */
+    Number grow(double amountToGrow){
+        if (this.size + amountToGrow < this.maxSize) {
+            this.size = this.size + amountToGrow;
+            System.out.println(this.name + " is now this size: " + this.size);
+            return this.size;
+        }
+        else {
+            throw new RuntimeException(this.name + " cannot grow by that amount.");
+        }
+    }
+
+    /**
+     * living creature rests for a user-specified number of hours
+     * @param hours to be rested
+     */
+    void rest(int hours){
+        System.out.println(this.name + " rested for " + hours + " hours.");
+    }
+
+    /**
+     * accessor for name
+     * @return name of living creature
+     */
+    String getName(){
+        return this.name;
     }
     
     /**
      * tries to repair damage done by a bite by apologizing, but if transmitted rabies and vampire, cannot try to undo the damage
      * @param victim to undo a bite to
      */
-    void undo(LivingCreature victim){
+    void undo(Bat victim){
         if (this.victims.contains(victim)) {
             if (victim.rabies || victim.isVampire) {
                 System.out.println("You tried to apologize to " + victim.name + ". Um... You can't undo a transmission of vampire qualities or rabies.");
@@ -64,21 +243,20 @@ public class Bat extends LivingCreature {
      * overload of undo()
      * if shapeshifted, shapeshifts back into previous state
      */
-    void undo() {
+    public void undo() {
         if (this.hasShapeShifted){
             this.shapeShift();
         }
         else {
             System.out.println("Nothing to undo.");
         }
-
     }
 
     /**
      * bites other living creatures (victims) and gives them rabies or turns them into vampires
      * @param victim to be bitten
      */
-    void bite(LivingCreature victim) {
+    void bite(Bat victim) {
         System.out.println(this.name + " bit " + victim.name + ".");
         this.victims.add(victim);
         if (this.rabies) {
@@ -106,37 +284,37 @@ public class Bat extends LivingCreature {
         }
     }
 
-
     /** for testing */
     public static void main(String[] args) {
-        Bat batty = new Bat("Batty", false, 30, 43, true);
+        Bat batty = new Bat("Batty", 20, 40, false, false);
+        Bat Teddy = new Bat("Teddy", 160, 152, false, true);
         batty.shapeShift();
-        Human Teddy = new Human("Teddy", 160, false);
+        //Human Teddy = new Human("Teddy", 160, false);
         batty.bite(Teddy);
         batty.undo(Teddy);
-        Human Egg = new Human("Egg", 165, false);
-        Human Tejas = new Human("Tejas", 168, false);
-        Human Amelia = new Human("Amelia", 163, false);
+        //Human Egg = new Human("Egg", 165, false);
+        //Human Tejas = new Human("Tejas", 168, false);
+        //Human Amelia = new Human("Amelia", 163, false);
         batty.shapeShift();
-        batty.bite(Egg);
-        batty.undo(Egg);
+        //batty.bite(Egg);
+        //batty.undo(Egg);
         batty.undo();
-        batty.bite(Tejas);
-        Teddy.befriend(Tejas);
-        Egg.befriend(Tejas);
-        Egg.befriend(Teddy);
-        Amelia.befriend(Teddy);
-        Egg.checkFriends();
-        Teddy.checkFriends();
+        //batty.bite(Tejas);
+        //Teddy.befriend(Tejas);
+        //Egg.befriend(Tejas);
+        //Egg.befriend(Teddy);
+        //Amelia.befriend(Teddy);
+        //Egg.checkFriends();
+        //Teddy.checkFriends();
         batty.rest(4);
-        Tejas.marry(Egg);
-        Tejas.getMarriedStatus();
-        Tejas.divorce(Egg);
-        Tejas.getMarriedStatus();
-        Teddy.grab("painting");
+        //Tejas.marry(Egg);
+        //Tejas.getMarriedStatus();
+        //Tejas.divorce(Egg);
+        //Tejas.getMarriedStatus();
+        //Teddy.grab("painting");
         //Teddy.grab("chair");
         //Teddy.shrink(3);
-        Egg.marry(Tejas);
+        //Egg.marry(Tejas);
         //Teddy.grow(3);
         //Teddy.marry(Amelia);
         //Amelia.getMarriedStatus();
