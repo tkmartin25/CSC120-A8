@@ -345,6 +345,8 @@ public class Bat implements Contract {
         batty.fly(8,-4);
         batty.checkCoordinates();
         batty.use("Healing Potion");
+        batty.examine("Healing Potion");
+        batty.use("chair");
         //Teddy.fly(3,4);
     }
 
